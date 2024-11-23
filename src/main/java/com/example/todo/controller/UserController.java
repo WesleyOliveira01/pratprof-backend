@@ -28,7 +28,10 @@ public class UserController {
 
     @PostConstruct
     public void init() {
-        userService.save(new UserDto("admin", "admin", "password", UserRoles.ADMIN));
+        List<UserDto> users = userService.getAll();
+        if (users.isEmpty()) {
+            userService.save(new UserDto("admin", "admin", "password", UserRoles.ADMIN));
+        }
     }
 
     @GetMapping
