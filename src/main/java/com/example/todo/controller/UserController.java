@@ -26,14 +26,6 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
-    @PostConstruct
-    public void init() {
-        List<UserDto> users = userService.getAll();
-        if (users.isEmpty()) {
-            userService.save(new UserDto("admin", "admin", "password", UserRoles.ADMIN));
-        }
-    }
-
     @GetMapping
     private ResponseEntity<?> getAll(@RequestHeader("Authorization") String token) {
         try {
